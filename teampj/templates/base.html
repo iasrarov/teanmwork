@@ -1,0 +1,42 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'main/style.css' %}">
+<div class="wrap">
+
+    <div class="header" align="center"><a href="{% url 'index' %}" class="top-menu"><h1>Блог сайт </h1></a></div>
+<!--    <div class="header" align="left"><a href="{% url 'index' %}" class="top-menu"><h1>Перейти на главную страницу </h1></a></div>-->
+    <a href="{% url 'new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+
+    <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="{% url 'index' %}">
+                        BLOG SITE
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}">Главное</a>
+                </li>
+                <li>
+                    <a href="{% url 'new' %}">Добавить</a>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+      {% for post in posts %}
+  <div class="content" align="center">
+      <h1><a href="{% url 'detail' pk=post.pk %}"> {{ post.title }}</a> </h1>
+       <h3>{{ post.text|linebreaksbr }}</h3>
+      <br>
+      <div class="date">
+                            {{ post.published_date }}
+                        </div>
+  </div>
+          {% endfor %}
+    {% block content %}
+    {% endblock content %}
+
+  <div class="push"></div>
+</div>
+<div class="footer">STICKY FOOTER</div>
